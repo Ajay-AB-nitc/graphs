@@ -39,6 +39,5 @@ int main(void) {
     }
 
     glfwDestroyWindow(window);
-    glfwTerminate();
     return 0;
 }

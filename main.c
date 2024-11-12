@@ -3,6 +3,7 @@
 
 typedef struct {
   int n_vertices; 
+  int n_edges;
   char vertices[100];
   char edges[200][2];
 }s_graph ;  
@@ -20,3 +21,33 @@ int main(){
 
   return 0;   
 }
+
+void read_s_graph(s_graph * s){
+  int num_vertices;
+  printf("Enter the number of vertices: ");
+  scanf("%d", &num_vertices);
+
+  
+  int num_edges;
+  printf("Enter the number of vertices: ");
+  scanf("%d", &num_edges);
+
+  s -> n_vertices =   num_vertices;
+  for (int i = 0; i < num_vertices; i++){
+    char inp;
+    printf("Enter a vertex: ");
+    scanf("%c", &inp);
+    s -> vertices[i] = inp;
+  }
+  
+  s -> n_edges = num_edges;
+  for (int i = 0; i < num_edges; i++){
+    char inp1, inp2;
+    printf("Enter the edge (start, end)\n");
+    scanf("%c %c", &inp1 , &inp2);
+    s -> edges[i][0] = inp1;
+    s -> edges[i][1] = inp2;
+  }
+
+}
+
