@@ -8,27 +8,6 @@ typedef struct {
   char edges[200][2];
 }s_graph ;  
 
-
-void read_s_graph(s_graph * s);
-void print_s_graph(s_graph *s);
-
-int main(){
-
-  s_graph wheel_4; 
-  wheel_4.n_vertices = 4; 
-  char wheel_4_v_init[] = {'a', 'b', 'c', 'd'};    
-  char wheel_4_e_init[][2]={{'a','b'},{'b','c'},{'c','d'},{'d','e'}};
-  
-  memcpy(wheel_4.vertices, wheel_4_v_init, sizeof(wheel_4_v_init));
-  memcpy(wheel_4.edges, wheel_4_e_init, sizeof(wheel_4_e_init));
-
-  s_graph wheel_5;
-  read_s_graph(&wheel_5);
-  print_s_graph(&wheel_5);
-  
-  return 0;   
-}
-
 void read_s_graph(s_graph * s){
   int num_vertices;
   printf("Enter the number of vertices: ");
