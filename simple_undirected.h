@@ -43,7 +43,7 @@ void print_s_graph(s_graph *s){
   printf("No. of vertices: %d \n", n_vertices);
   printf("No. of edges: %d \n", n_edges);
 
-  printf("Vertices:");
+  printf("Vertices: ");
   for (int i = 0; i < n_vertices; i++){
     printf("%c ", s->vertices[i]);
   }
