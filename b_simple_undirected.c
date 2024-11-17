@@ -3,7 +3,7 @@
 typedef struct vertex vertex;
 
 struct vertex{
-  int name;
+  //int name;
   int degree;
   vertex * neighbours[100];
 };
@@ -54,7 +54,7 @@ void read_su_graph(su_graph * s){
 
   for (int i = 0; i < n_vertices; i++){
     s -> vertices[i].degree = 0;
-    s -> vertices[i].name= i;
+    //s -> vertices[i].name= i;
   }
   
   s -> n_edges = n_edges;
@@ -88,8 +88,15 @@ void print_su_graph(su_graph * s){
   for (int i = 0 ;i < s -> n_vertices; i++){
     printf("degree of %d: %d\n", i , s -> vertices[i].degree);
   }
+  
+
   for (int i = 0 ;i < s -> n_edges; i++){
-    printf("edge %d: %d - %d\n", i , s -> edges[i].start->name,s -> edges[i].end->name);
+    int start, end;    
+    start = s-> edges[i].start - &(s->vertices[0]);
+    end = s-> edges[i].end - &(s->vertices[0]);
+    printf("edge %d: %d - %d\n", i, start, end);
+    
+    /*printf("edge %d: %d - %d\n", i , s -> edges[i].start->name,s -> edges[i].end->name);*/
   }
 
 }
