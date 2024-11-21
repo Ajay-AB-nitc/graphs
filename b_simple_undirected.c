@@ -36,22 +36,25 @@ su_graph su_arr[100];
 void read_su_graph(su_graph * s);
 void print_su_graph(su_graph * s);
 void write_su_graph(su_graph * s);
-void load_su_garaph();
-
+int load_su_garaph();
+int print_loaded_su_graph(int n);
 int main(){
   su_graph g1;
   /*read_su_graph(&g1);*/
   /*print_su_graph(&g1);*/
   /*write_su_graph(&g1);*/
-  load_su_garaph();
   /*print_su_graph(&g1);*/
-  print_su_graph(&su_arr[0]);
-  print_su_graph(&su_arr[1]);
-  print_su_graph(&su_arr[2]);
-  print_su_graph(&su_arr[3]);
-  print_su_graph(&su_arr[4]);
+  /*print_su_graph(&su_arr[0]);*/
   /*print_su_graph(&su_arr[1]);*/
   /*print_su_graph(&su_arr[2]);*/
+  /*print_su_graph(&su_arr[3]);*/
+  /*print_su_graph(&su_arr[4]);*/
+  /*print_su_graph(&su_arr[1]);*/
+  /*print_su_graph(&su_arr[2]);*/
+  while (1){
+  print_loaded_su_graph(load_su_garaph());
+  }
+
   return 0;
 }
 
@@ -146,7 +149,7 @@ void write_su_graph(su_graph * s){
 }
 
 
-void load_su_garaph(){
+int load_su_garaph(){
   struct dirent * entry;
   DIR *dp = opendir("su_graphs");
 
@@ -175,7 +178,19 @@ void load_su_garaph(){
     fclose(fp);
   }
   closedir(dp);
+  return i;
 }
 
 
+int print_loaded_su_graph(int n){
+  char inp[100];
+  scanf("%s", inp);
+  for (int i = 0; i < n; i++){
+    if (strcmp(inp,su_arr[i].name) == 0){
+      print_su_graph(&su_arr[i]);
+      return n;
+    }
+  }printf("Enter a valid graph name\n");
+  print_loaded_su_graph(n);
+}
 
