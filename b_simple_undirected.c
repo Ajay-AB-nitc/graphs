@@ -39,14 +39,19 @@ void write_su_graph(su_graph * s);
 void load_su_garaph();
 
 int main(){
-  /*su_graph g1;*/
+  su_graph g1;
   /*read_su_graph(&g1);*/
   /*print_su_graph(&g1);*/
   /*write_su_graph(&g1);*/
   load_su_garaph();
+  /*print_su_graph(&g1);*/
   print_su_graph(&su_arr[0]);
   print_su_graph(&su_arr[1]);
   print_su_graph(&su_arr[2]);
+  print_su_graph(&su_arr[3]);
+  print_su_graph(&su_arr[4]);
+  /*print_su_graph(&su_arr[1]);*/
+  /*print_su_graph(&su_arr[2]);*/
   return 0;
 }
 
