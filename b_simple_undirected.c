@@ -52,7 +52,13 @@ void space_vertices_su_graph(su_graph * s);
 /*  print_su_graph(&su_arr[3]);*/
 /*}*/
 
-
+/*int main(){*/
+/*  su_graph g1;*/
+/*  read_su_graph(&g1);*/
+/*  print_su_graph(&g1);*/
+/*  write_su_graph(&g1);*/
+/*  return 0;*/
+/*}*/
 
 
 
@@ -191,8 +197,21 @@ void space_vertices_su_graph(su_graph * s)
   double unit = 2 * M_PI / s->n_vertices;
 
   for (int i = 0; i < s->n_vertices; i++){
-    s->vertices[i].x = 600 - (int)300*sin(unit * (i+1));
-    s->vertices[i].y = 360 + (int)200*cos(unit * (i+1));
+    s->vertices[i].x = 955 + (int)300*cos(unit * (i+1));
+    s->vertices[i].y = 535 + (int)300*sin(unit * (i+1));
+  }
+  if (s->name[0] == 'W'){
+
+    unit = 2 * M_PI / (s->n_vertices-1);
+    s->vertices[s->n_vertices-1].x =600;
+    s->vertices[s->n_vertices-1].y = 360;
+
+    for (int i = 0; i < s->n_vertices - 1; i++){
+      s->vertices[i].x = 955 + (int)300*cos(unit * (i+1));
+      s->vertices[i].y = 535 + (int)300*sin(unit * (i+1));
+    }
+
+
   }
 }
 
