@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <dirent.h>
+#include <math.h>
 
 typedef struct vertex vertex;
 
@@ -40,7 +41,7 @@ void print_su_graph(su_graph * s);
 void write_su_graph(su_graph * s);
 int load_su_graph();
 int print_loaded_su_graph(int n);
-
+void space_vertices_su_graph(su_graph * s);
 
 /*int main()*/
 /*{*/
@@ -181,5 +182,17 @@ int print_loaded_su_graph(int n){
     }
   }printf("Enter a valid graph name\n");
   print_loaded_su_graph(n);
+}
+
+void space_vertices_su_graph(su_graph * s)
+{
+  int current_x = 0;
+  int current_y = 0;
+  double unit = 2 * M_PI / s->n_vertices;
+
+  for (int i = 0; i < s->n_vertices; i++){
+    s->vertices[i].x = 600 - (int)300*sin(unit * (i+1));
+    s->vertices[i].y = 360 + (int)200*cos(unit * (i+1));
+  }
 }
 
