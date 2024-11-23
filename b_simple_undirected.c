@@ -8,6 +8,8 @@ typedef struct vertex vertex;
 struct vertex{
   //int name;
   int degree;
+  int x;
+  int y;
   vertex * neighbours[100];
 };
 
@@ -36,28 +38,18 @@ su_graph su_arr[100];
 void read_su_graph(su_graph * s);
 void print_su_graph(su_graph * s);
 void write_su_graph(su_graph * s);
-int load_su_garaph();
+int load_su_graph();
 int print_loaded_su_graph(int n);
-int main(){
-  su_graph g1;
-  /*read_su_graph(&g1);*/
-  /*print_su_graph(&g1);*/
-  /*write_su_graph(&g1);*/
-  /*print_su_graph(&g1);*/
-  /*print_su_graph(&su_arr[0]);*/
-  /*print_su_graph(&su_arr[1]);*/
-  /*print_su_graph(&su_arr[2]);*/
-  /*print_su_graph(&su_arr[3]);*/
-  /*print_su_graph(&su_arr[4]);*/
-  /*print_su_graph(&su_arr[1]);*/
-  /*print_su_graph(&su_arr[2]);*/
-  while (1){
-  print_loaded_su_graph(load_su_garaph());
-  }
 
-  return 0;
-}
 
+/*int main()*/
+/*{*/
+/*  load_su_graph();*/
+/*  print_su_graph(&su_arr[0]);*/
+/*  print_su_graph(&su_arr[1]);*/
+/*  print_su_graph(&su_arr[2]);*/
+/*  print_su_graph(&su_arr[3]);*/
+/*}*/
 
 
 
@@ -110,10 +102,7 @@ void read_su_graph(su_graph * s){
 
 
 
-void print_su_graph(su_graph * s){
-  printf("\n%s\n", s->name);
-  printf("No. of vertices: %d\n", s -> n_vertices);
-  printf("No. of edges: %d\n", s -> n_edges);
+void print_su_graph(su_graph * s){ printf("\n%s\n", s->name); printf("No. of vertices: %d\n", s -> n_vertices); printf("No. of edges: %d\n", s -> n_edges);
 
   for (int i = 0 ;i < s -> n_vertices; i++){
     printf("degree of %d: %d\n", i , s -> vertices[i].degree);
@@ -149,7 +138,7 @@ void write_su_graph(su_graph * s){
 }
 
 
-int load_su_garaph(){
+int load_su_graph(){
   struct dirent * entry;
   DIR *dp = opendir("su_graphs");
 
