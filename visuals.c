@@ -7,29 +7,48 @@
 void draw_su_vertex(vertex* pvertex, int n);
 void draw_su_graph(su_graph *);
 void draw_su_edge();
-
+int is_hovered(vertex *, Vector2 mouse_pos, float radius);
 
 int main(void)
-{
-  load_su_graph();
+{ int val = 0;
+  int n_graphs = load_su_graph();
   InitWindow(1910, 1070, "raylib [core] example - basic window");
+  int x_dist = 20;
+  int y_dist = 20;
+
   while (!WindowShouldClose())
   {
+    Vector2 mouse_pos = GetMousePosition();
     BeginDrawing();
 
     ClearBackground(WHITE);
-    /*draw_su_edge(&su_arr[3], &su_arr[3].edges[0]);*/
-    /*draw_su_edge(&su_arr[3], &su_arr[3].edges[1]);*/
-    /*draw_su_edge(&su_arr[3], &su_arr[3].edges[2]);*/
-    /*draw_su_edge(&su_arr[3], &su_arr[3].edges[3]);*/
-    /*draw_su_edge(&su_arr[3], &su_arr[3].edges[4]);*/
-    /*draw_su_edge(&su_arr[3], &su_arr[3].edges[4]);*/
-    /*draw_su_edge(&su_arr[3], &su_arr[3].edges[4]);*/
-    /*draw_su_edge(&su_arr[3], &su_arr[3].edges[4]);*/
 
-    draw_su_graph(&su_arr[1]);
+   
+    int inp = GetKeyPressed();
+    if (inp != 0 && inp > 47 && inp < 58) val = inp - 48;
+    if (inp == 68 && val < n_graphs -1) val++;
+    if (inp == 65 && val > 0) val --;
+    DrawText(su_arr[val].name, 10, 40, 60, BLACK);
+    draw_su_graph(&su_arr[val]);
 
 
+   for (int i = 0; i < su_arr[val].n_vertices; i++) {
+    if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && is_hovered(&su_arr[val].vertices[i], mouse_pos, 30.0))
+    {
+      /*printf("%d\n", is_hovered(&su_arr[val].vertices[0], mouse_pos));*/
+      printf("here 1");
+      x_dist = mouse_pos.x - su_arr[val].vertices[i].x;
+      y_dist = mouse_pos.y - su_arr[val].vertices[i].y;
+      /*printf("%s\n") */
+    }
+
+    if(IsMouseButtonDown(MOUSE_BUTTON_LEFT) && is_hovered(&su_arr[val].vertices[i], mouse_pos, 30.0)){
+      printf("here 2");
+      su_arr[val].vertices[i].x = mouse_pos.x - x_dist;
+      su_arr[val].vertices[i].y = mouse_pos.y - y_dist;
+
+    }
+   }   
     EndDrawing();
   }
 
@@ -50,7 +69,6 @@ void draw_su_vertex(vertex* pvertex, int n)
 
 void draw_su_graph(su_graph * s)
 {
-  space_vertices_su_graph(s);
   
   for (int i = 0; i < s->n_edges; i++)
     draw_su_edge(s, &s->edges[i]);
@@ -68,6 +86,21 @@ void draw_su_edge(su_graph * s, edge * e)
   
 
 }
+
+
+int is_hovered(vertex * v, Vector2 mouse_pos, float radius)
+{
+  float distance = sqrt(pow((v->x - mouse_pos.x), 2) + pow((v->y - mouse_pos.y), 2)); 
+  /*printf("%f ", distance);*/
+  if (distance <= radius){return 1;}
+  else   return 0;
+  
+}
+
+
+
+
+
 
 
 

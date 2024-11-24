@@ -174,6 +174,10 @@ int load_su_graph(){
     fclose(fp);
   }
   closedir(dp);
+  for (int j = 0; j < i; j++) 
+    space_vertices_su_graph(&su_arr[j]);
+
+
   return i;
 }
 
@@ -203,8 +207,8 @@ void space_vertices_su_graph(su_graph * s)
   if (s->name[0] == 'W'){
 
     unit = 2 * M_PI / (s->n_vertices-1);
-    s->vertices[s->n_vertices-1].x =600;
-    s->vertices[s->n_vertices-1].y = 360;
+    s->vertices[s->n_vertices-1].x = 955;
+    s->vertices[s->n_vertices-1].y = 535;
 
     for (int i = 0; i < s->n_vertices - 1; i++){
       s->vertices[i].x = 955 + (int)300*cos(unit * (i+1));
