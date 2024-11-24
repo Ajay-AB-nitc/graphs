@@ -11,6 +11,7 @@ int is_hovered(vertex *, Vector2 mouse_pos, float radius);
 
 int main(void)
 { int val = 0;
+  int hovered_vertex = 0;
   int n_graphs = load_su_graph();
   InitWindow(1910, 1070, "raylib [core] example - basic window");
   int x_dist = 20;
@@ -36,19 +37,20 @@ int main(void)
     if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && is_hovered(&su_arr[val].vertices[i], mouse_pos, 30.0))
     {
       /*printf("%d\n", is_hovered(&su_arr[val].vertices[0], mouse_pos));*/
+      hovered_vertex = i; 
       printf("here 1");
       x_dist = mouse_pos.x - su_arr[val].vertices[i].x;
       y_dist = mouse_pos.y - su_arr[val].vertices[i].y;
       /*printf("%s\n") */
     }
 
-    if(IsMouseButtonDown(MOUSE_BUTTON_LEFT) && is_hovered(&su_arr[val].vertices[i], mouse_pos, 30.0)){
+   }   
+    if(IsMouseButtonDown(MOUSE_BUTTON_LEFT) && is_hovered(&su_arr[val].vertices[hovered_vertex], mouse_pos, 30.0)){
       printf("here 2");
-      su_arr[val].vertices[i].x = mouse_pos.x - x_dist;
-      su_arr[val].vertices[i].y = mouse_pos.y - y_dist;
+      su_arr[val].vertices[hovered_vertex].x = mouse_pos.x - x_dist;
+      su_arr[val].vertices[hovered_vertex].y = mouse_pos.y - y_dist;
 
     }
-   }   
     EndDrawing();
   }
 
