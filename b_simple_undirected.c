@@ -59,7 +59,7 @@ void space_vertices_su_graph(su_graph * s);
 /*  write_su_graph(&g1);*/
 /*  return 0;*/
 /*}*/
-
+/**/
 
 
 void read_su_graph(su_graph * s){
