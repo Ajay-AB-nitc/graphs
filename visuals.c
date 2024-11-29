@@ -8,7 +8,7 @@ void draw_su_vertex(vertex* pvertex, int n);
 void draw_su_graph(su_graph *);
 void draw_su_edge();
 int is_hovered(vertex *, Vector2 mouse_pos, float radius);
-
+void highlight(vertex * v, Color color);
 int main(void)
 { int val = 0;
   int hovered_vertex = 0;
@@ -34,6 +34,11 @@ int main(void)
 
 
    for (int i = 0; i < su_arr[val].n_vertices; i++) {
+    if (is_hovered(&su_arr[val].vertices[i], mouse_pos, 30.0)){
+        highlight(&su_arr[val].vertices[i], BLACK);
+        draw_su_vertex(&su_arr[val].vertices[i], i);
+      }
+
     if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && is_hovered(&su_arr[val].vertices[i], mouse_pos, 30.0))
     {
       /*printf("%d\n", is_hovered(&su_arr[val].vertices[0], mouse_pos));*/
@@ -97,7 +102,10 @@ int is_hovered(vertex * v, Vector2 mouse_pos, float radius)
   
 }
 
-
+void highlight(vertex * v, Color color)
+{
+  DrawCircle(v->x, v->y, 35.0f, color);
+}
 
 
 
