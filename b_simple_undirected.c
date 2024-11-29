@@ -11,13 +11,9 @@ struct vertex{
   int degree;
   int x;
   int y;
-  vertex * neighbours[100];
+  /*vertex neighbours[100];*/
+  int neighbours[100];
 };
-
-/*typedef struct {*/
-/*  vertex * start;*/
-/*  vertex * end;*/
-/*}edge;*/
 
 typedef struct {
   int start;
@@ -43,16 +39,9 @@ int load_su_graph();
 int print_loaded_su_graph(int n);
 void space_vertices_su_graph(su_graph * s);
 
-/*int main()*/
-/*{*/
-/*  load_su_graph();*/
-/*  print_su_graph(&su_arr[0]);*/
-/*  print_su_graph(&su_arr[1]);*/
-/*  print_su_graph(&su_arr[2]);*/
-/*  print_su_graph(&su_arr[3]);*/
-/*}*/
 
 /*int main(){*/
+  /*print_loaded_su_graph(load_su_graph());*/
 /*  su_graph g1;*/
 /*  read_su_graph(&g1);*/
 /*  print_su_graph(&g1);*/
@@ -60,7 +49,16 @@ void space_vertices_su_graph(su_graph * s);
 /*  return 0;*/
 /*}*/
 
-
+/*int main(){*/
+/*  load_su_graph();*/
+/*  for (int i = 0; i < su_arr[5].n_vertices; i++){*/
+/*    printf("%d: ", i);*/
+/*    for (int j = 0; j < su_arr[5].vertices[i].degree ;j++){*/
+/*      printf("%d ", su_arr[5].vertices[i].neighbours[j]);*/
+/*    }*/
+/*    printf("\n");*/
+/*  }*/
+/*}*/
 
 void read_su_graph(su_graph * s){
   vertex * vset = s -> vertices;
@@ -97,8 +95,9 @@ void read_su_graph(su_graph * s){
     s -> edges[i].start = inp1;
     s -> edges[i].end = inp2;
     
-    vset[inp1].neighbours[vset[inp1].degree];
-    vset[inp2].neighbours[vset[inp2].degree];
+    vset[inp1].neighbours[vset[inp1].degree] = inp2;
+    vset[inp2].neighbours[vset[inp2].degree] = inp1;
+
      
     vset[inp1].degree++;
     vset[inp2].degree++;
@@ -109,7 +108,10 @@ void read_su_graph(su_graph * s){
 
 
 
-void print_su_graph(su_graph * s){ printf("\n%s\n", s->name); printf("No. of vertices: %d\n", s -> n_vertices); printf("No. of edges: %d\n", s -> n_edges);
+void print_su_graph(su_graph * s){ 
+  printf("\n%s\n", s->name); 
+  printf("No. of vertices: %d\n", s -> n_vertices);
+  printf("No. of edges: %d\n", s -> n_edges);
 
   for (int i = 0 ;i < s -> n_vertices; i++){
     printf("degree of %d: %d\n", i , s -> vertices[i].degree);

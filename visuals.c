@@ -8,9 +8,12 @@ void draw_su_vertex(vertex* pvertex, int n);
 void draw_su_graph(su_graph *);
 void draw_su_edge();
 int is_hovered(vertex *, Vector2 mouse_pos, float radius);
-void highlight(vertex * v, Color color);
+void highlight(vertex * v, int n,  Color color);
+void highlight_neighbours(vertex * v, su_graph * s);
+
 int main(void)
-{ int val = 0;
+{ 
+  int val = 0;
   int hovered_vertex = 0;
   int n_graphs = load_su_graph();
   InitWindow(1910, 1070, "raylib [core] example - basic window");
@@ -35,8 +38,8 @@ int main(void)
 
    for (int i = 0; i < su_arr[val].n_vertices; i++) {
     if (is_hovered(&su_arr[val].vertices[i], mouse_pos, 30.0)){
-        highlight(&su_arr[val].vertices[i], BLACK);
-        draw_su_vertex(&su_arr[val].vertices[i], i);
+        highlight(&su_arr[val].vertices[i], i, BLACK);
+        highlight_neighbours(&su_arr[val].vertices[i], &su_arr[val]);
       }
 
     if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && is_hovered(&su_arr[val].vertices[i], mouse_pos, 30.0))
@@ -84,14 +87,9 @@ void draw_su_graph(su_graph * s)
 
 void draw_su_edge(su_graph * s, edge * e)
 {
-  /*DrawLine(s->vertices[e->start].x, s->vertices[e->start].y,*/
-           /*s->vertices[e->end].x,s->vertices[e->end].y, BLACK);*/
   DrawLineEx((Vector2){s->vertices[e->start].x, s->vertices[e->start].y},
              (Vector2){s->vertices[e->end].x ,s->vertices[e->end].y}, 3.0, BLACK);
-  
-
 }
-
 
 int is_hovered(vertex * v, Vector2 mouse_pos, float radius)
 {
@@ -102,12 +100,22 @@ int is_hovered(vertex * v, Vector2 mouse_pos, float radius)
   
 }
 
-void highlight(vertex * v, Color color)
+void highlight(vertex * v,int n, Color color)
 {
-  DrawCircle(v->x, v->y, 35.0f, color);
+  DrawCircle(v->x, v->y, 37.0f, color);
+  draw_su_vertex(v, n);
 }
 
-
+void highlight_neighbours(vertex * v, su_graph * s)
+{
+  print_su_graph(s);
+  for (int i = 0; i < v->degree; i++)
+  {
+    highlight(&s->vertices[v->neighbours[i]], v->neighbours[i], GRAY);
+    /*printf("%d\n", v->neighbours[i]);*/
+  }
+  printf("degree :%d\n\n", v->degree );
+}
 
 
 
