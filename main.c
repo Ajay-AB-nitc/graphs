@@ -3,7 +3,7 @@
 #include "visuals.c"
 
 
-int main(void)
+int main(int argc, char * argv[])
 { 
   int val = 0;
   int hovered_vertex = 0;
@@ -26,11 +26,11 @@ int main(void)
     if (inp == 65 && val > 0) val --;
     DrawText(su_arr[val].name, 10, 40, 60, BLACK);
     draw_su_graph(&su_arr[val]);
-
+    highlight_edge(&su_arr[val], &su_arr[val].edges[0], RED);
 
    for (int i = 0; i < su_arr[val].n_vertices; i++) {
     if (is_hovered(&su_arr[val].vertices[i], mouse_pos, 30.0)){
-        highlight(&su_arr[val].vertices[i], i, BLACK);
+        highlight_vertex(&su_arr[val].vertices[i], i, BLACK);
         highlight_neighbours(&su_arr[val].vertices[i], &su_arr[val]);
       }
 
@@ -51,7 +51,7 @@ int main(void)
   }
 
   CloseWindow();
-  return 0;
+  /*return 0;*/
 }
 
 
