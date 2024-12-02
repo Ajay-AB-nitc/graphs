@@ -7,17 +7,17 @@
 typedef struct vertex vertex;
 
 struct vertex{
-  //int name;
   int degree;
   int x;
   int y;
-  /*vertex neighbours[100];*/
+  int is_selected;
   int neighbours[100];
 };
 
 typedef struct {
   int start;
   int end;
+  int is_selected;
 }edge;
 
 typedef struct {
@@ -46,19 +46,11 @@ void space_vertices_su_graph(su_graph * s);
 /*  read_su_graph(&g1);*/
 /*  print_su_graph(&g1);*/
 /*  write_su_graph(&g1);*/
+/*  printf("%d\n",g1.vertices[g1.n_vertices-1].is_selected);*/
+/*  printf("%d\n",g1.edges[g1.n_edges-1].is_selected);*/
 /*  return 0;*/
 /*}*/
 
-/*int main(){*/
-/*  load_su_graph();*/
-/*  for (int i = 0; i < su_arr[5].n_vertices; i++){*/
-/*    printf("%d: ", i);*/
-/*    for (int j = 0; j < su_arr[5].vertices[i].degree ;j++){*/
-/*      printf("%d ", su_arr[5].vertices[i].neighbours[j]);*/
-/*    }*/
-/*    printf("\n");*/
-/*  }*/
-/*}*/
 
 void read_su_graph(su_graph * s){
   vertex * vset = s -> vertices;
@@ -80,21 +72,28 @@ void read_su_graph(su_graph * s){
 
   for (int i = 0; i < n_vertices; i++){
     s -> vertices[i].degree = 0;
-    //s -> vertices[i].name= i;
+    s ->vertices[i].is_selected = 0;
   }
   
   s -> n_edges = n_edges;
-  
+   
 
   for (int i = 0; i < n_edges; i++){
     int inp1, inp2;
     printf("Enter the edge (start, end)\n");
     scanf(" %d %d", &inp1 , &inp2);
-    /*eset[i].start = &(vset[inp1]);*/
-    /*eset[i].end = &(vset[inp2]);*/
+    
+    if (inp1 > inp2)   // make start < end 
+    {
+      int c = inp1;
+      inp1 = inp2;
+      inp2 = c;
+    }
+    
     s -> edges[i].start = inp1;
     s -> edges[i].end = inp2;
-    
+    s -> edges[i].is_selected = 0;
+
     vset[inp1].neighbours[vset[inp1].degree] = inp2;
     vset[inp2].neighbours[vset[inp2].degree] = inp1;
 
@@ -120,13 +119,10 @@ void print_su_graph(su_graph * s){
 
   for (int i = 0 ;i < s -> n_edges; i++){
     int start, end;    
-    /*start = s-> edges[i].start - &(s->vertices[0]);*/
-    /*end = s-> edges[i].end - &(s->vertices[0]);*/
     start = s -> edges[i].start;
     end = s -> edges[i].end;
     printf("edge %d: %d - %d\n", i, start, end);
     
-    /*printf("edge %d: %d - %d\n", i , s -> edges[i].start->name,s -> edges[i].end->name);*/
   }
 
 }

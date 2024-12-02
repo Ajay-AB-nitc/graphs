@@ -9,6 +9,7 @@ void draw_su_graph(su_graph *);
 void draw_su_edge(su_graph * s, edge * e, Color color);
 int is_hovered(vertex *, Vector2 mouse_pos, float radius);
 void highlight_vertex(vertex * v, int n,  Color color);
+void highlight_edge(su_graph * s, edge * e, Color color);
 void highlight_neighbours(vertex * v, su_graph * s);
 
 
@@ -66,8 +67,6 @@ void highlight_edge(su_graph * s, edge * e, Color color)
   draw_su_vertex(&s->vertices[e->start], e->start);
   draw_su_vertex(&s->vertices[e->end], e->end);
 }
-
-
 
 
 
