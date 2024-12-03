@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "simple_undirected.h"
+#include "b_simple_undirected.c"
 #include "visuals.c"
 
 
@@ -12,7 +12,7 @@ int main(int argc, char * argv[])
   int n_selected = 0;
   int x_dist = 20;
   int y_dist = 20;
-  InitWindow(1910, 1070, "raylib [core] example - basic window");
+  InitWindow(1910, 1070, "Graphs");
   /*SetTargetFPS(20);*/
   while (!WindowShouldClose())
   {

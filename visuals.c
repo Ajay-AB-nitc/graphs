@@ -1,5 +1,4 @@
 #include "raylib.h"
-#include "b_simple_undirected.c"
 
 #define x_offset -16
 #define y_offset -14
@@ -73,15 +72,5 @@ void highlight_edge(su_graph * s, edge * e, Color color)
 
 
 
-
-
-/*void gui_read_su_graph(char * name, int n_vertices, int n_edges){*/
-/*  su_graph s;*/
-/*  s.name = name;*/
-/*  s.n_vertices = n_vertices;*/
-/*  s.n_edges = n_edges;*/
-/*  use main function arggument to make a new graph*/
-/**/
-/*}*/
 
 
