@@ -9,9 +9,7 @@ typedef struct vertex vertex;
 struct vertex{
   int degree;
   int x;
-  int y;
-  int is_selected;
-  int neighbours[100];
+  int y; int is_selected; int neighbours[100];
 };
 
 typedef struct {
