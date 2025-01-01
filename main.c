@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "b_simple_undirected.c"
 #include "visuals.c"
 
@@ -86,7 +85,7 @@ int main(int argc, char * argv[])
       }
       if (su_arr[val].edges[i].is_selected) highlight_edge(&su_arr[val], &su_arr[val].edges[i], GOLD);
     }
-
+    
     EndDrawing();
   }
 

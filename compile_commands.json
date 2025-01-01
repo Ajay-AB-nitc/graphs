@@ -1,0 +1,14 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-o",
+      "game",
+      "main.c"
+    ],
+    "directory": "/home/ajay/c-projects/random/graphs",
+    "file": "/home/ajay/c-projects/random/graphs/main.c",
+    "output": "/home/ajay/c-projects/random/graphs/game"
+  }
+]

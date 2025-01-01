@@ -9,7 +9,9 @@ typedef struct vertex vertex;
 struct vertex{
   int degree;
   int x;
-  int y; int is_selected; int neighbours[100];
+  int y;
+  int is_selected;
+  int neighbours[100];
 };
 
 typedef struct {
@@ -38,24 +40,20 @@ int print_loaded_su_graph(int n);
 void space_vertices_su_graph(su_graph * s);
 
 
-/*int main(){*/
-  /*print_loaded_su_graph(load_su_graph());*/
-/*  su_graph g1;*/
-/*  read_su_graph(&g1);*/
-/*  print_su_graph(&g1);*/
-/*  write_su_graph(&g1);*/
-/*  printf("%d\n",g1.vertices[g1.n_vertices-1].is_selected);*/
-/*  printf("%d\n",g1.edges[g1.n_edges-1].is_selected);*/
-/*  return 0;*/
-/*}*/
+// int main(){
+//   su_graph g1;
+//   read_su_graph(&g1);
+//   print_su_graph(&g1);
+//   write_su_graph(&g1);
+//   return 0;
+// }
 
 
 void read_su_graph(su_graph * s){
-  vertex * vset = s -> vertices;
-  /*edge * eset = s -> edges;*/
+  vertex * vset = s -> vertices;  // for easy calling
   
   printf("Enter the name of the graph: ");
-  scanf("%s", &(s -> name));
+  scanf("%s", &(s -> name));     // it works ig
 
   int n_vertices;
   printf("Enter the number of vertices: ");
@@ -68,7 +66,7 @@ void read_su_graph(su_graph * s){
   
   s -> n_vertices =   n_vertices;
 
-  for (int i = 0; i < n_vertices; i++){
+  for (int i = 0; i < n_vertices; i++){   // definig vertices upto n_vertices
     s -> vertices[i].degree = 0;
     s ->vertices[i].is_selected = 0;
   }
@@ -76,7 +74,7 @@ void read_su_graph(su_graph * s){
   s -> n_edges = n_edges;
    
 
-  for (int i = 0; i < n_edges; i++){
+  for (int i = 0; i < n_edges; i++){  // inputing edges
     int inp1, inp2;
     printf("Enter the edge (start, end)\n");
     scanf(" %d %d", &inp1 , &inp2);
@@ -92,11 +90,11 @@ void read_su_graph(su_graph * s){
     s -> edges[i].end = inp2;
     s -> edges[i].is_selected = 0;
 
-    vset[inp1].neighbours[vset[inp1].degree] = inp2;
-    vset[inp2].neighbours[vset[inp2].degree] = inp1;
+    vset[inp1].neighbours[vset[inp1].degree] = inp2;  // adding inp2 to the neighbours of inp1
+    vset[inp2].neighbours[vset[inp2].degree] = inp1;  // adding inp1 to the neighbours of inp2
 
      
-    vset[inp1].degree++;
+    vset[inp1].degree++; // appening degrees
     vset[inp2].degree++;
   }
 
@@ -151,17 +149,16 @@ int load_su_graph(){
   }
   
   int i = 0;
-  while ((entry = readdir(dp)) != NULL){
+  while ((entry = readdir(dp)) != NULL){  // for each entry in su_graphs
 
     char path[100] = "su_graphs/";
     char fname[100];
     strcpy(fname,entry->d_name);
     if (strcmp(entry->d_name, ".") == 0 ||
-      strcmp(entry->d_name, "..") == 0)continue;
+      strcmp(entry->d_name, "..") == 0)continue; // ignoring current and preivous directies
     
-    strcat(path, fname); 
-    
-    FILE * fp = fopen(path, "rb");
+    strcat(path, fname); // concatanating file name to path   
+    FILE * fp = fopen(path, "rb");   /// here
     if (fp == NULL) {
         perror("Error opening file\n");
         exit(1);
